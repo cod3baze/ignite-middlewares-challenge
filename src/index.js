@@ -37,14 +37,23 @@ function checksTodoExists(request, response, next) {
   const { id } = request.params;
 
   const isUUID = validate(id);
-  const userIsOwner = user.todos.find((todo) => todo.id === id);
-
-  if (isUUID && userIsOwner) {
-    request.todo = userIsOwner;
-    return next();
+  if (!isUUID) {
+    return response.status(400).json({ error: "ID is invalid" });
   }
 
-  return response.status(404).json({ error: "TODO do not exists" });
+  if (!user) {
+    return response.status(404).json({ error: "USER do not exists" });
+  }
+
+  const userIsOwner = user.todos.find((todo) => todo.id === id);
+  if (!userIsOwner) {
+    return response
+      .status(404)
+      .json({ error: "TODO do not belong to that user" });
+  }
+
+  request.todo = userIsOwner;
+  return next();
 }
 
 function findUserById(request, response, next) {
