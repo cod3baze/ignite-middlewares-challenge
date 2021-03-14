@@ -1,4 +1,4 @@
-# ignite-middlewares-challenge
+# Middlewares
 
   > ignite template-trabalhando-com-middlewares
   
