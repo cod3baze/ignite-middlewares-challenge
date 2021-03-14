@@ -3,7 +3,7 @@ const { v4 } = require('uuid');
 const {
   users,
   findUserById
-} = require('../../');
+} = require('../..');
 
 let response;
 let request;

@@ -29,7 +29,7 @@ function checksCreateTodosUserAvailability(request, response, next) {
     return next();
   }
 
-  return response.status(401).json({ error: "User have to Update your plan" });
+  return response.status(403).json({ error: "User have to Update your plan" });
 }
 
 function checksTodoExists(request, response, next) {
